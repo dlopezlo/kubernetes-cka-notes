@@ -384,9 +384,110 @@ Other resources that can be created this way:
   * service
   * serviceaccount      
 
-
-  httpd-frontend; Replicas: 3; Image: httpd:2.4-alpine
-
 ## Namespaces
 
+Namespaces are used for resource isolation.
 
+Each namespace have their own policies and Resource limits.
+
+Resource in the same namespace can reach eachother by their short name, but to reach others in another namespace the full dns name must be used.
+
+Kubernetes creates several namespaces automatically:
+
+- kube-system
+- default
+- kube-public
+
+
+
+Create a namespace:
+```console
+vagrant@vagrant:~$ kubectl create namespace dev
+namespace/dev created
+```
+
+or with a definition file:
+
+```yaml
+apiVersion: v1
+kind: Namespace
+
+metadata: 
+  name: dev
+```
+
+
+```console
+vagrant@vagrant:~$ kubectl apply -f test-namespace.yml
+Warning: kubectl apply should be used on resource created by either kubectl create --save-config or kubectl apply
+namespace/dev configured
+```
+
+Create a pod in the namespace:
+```console
+vagrant@vagrant:~$ kubectl apply -f pod-definition.yml -n dev
+pod/myapp-pod created
+```
+
+List pods in a certain namespace:
+
+```console
+kubectl get pods --namespace=dev
+kubectl get pods -n dev
+```
+
+Namespaces in Pods can also be defined in the definition yaml file:
+
+```yaml
+apiVersion: v1
+kind: Pod
+
+metadata: 
+  name: myapp
+  namespace: dev
+  ...
+```
+
+If namespace is not specified the default one is used. But context can be switched in order to use a different namespace by default:
+
+```
+kubectl config set-context $(kubectl config current-context) --namespace=dev
+```
+
+List pods in all namespaces:
+
+```yaml
+vagrant@vagrant:~$ kubectl get pods --all-namespaces
+NAMESPACE     NAME                               READY   STATUS    RESTARTS   AGE
+dev           myapp-pod                          1/1     Running   0          23m
+kube-system   coredns-66bff467f8-n8rlt           1/1     Running   0          30h
+kube-system   etcd-minikube                      1/1     Running   0          30h
+kube-system   kube-apiserver-minikube            1/1     Running   0          30h
+kube-system   kube-controller-manager-minikube   1/1     Running   0          30h
+kube-system   kube-proxy-b7fqj                   1/1     Running   0          30h
+kube-system   kube-scheduler-minikube            1/1     Running   0          30h
+kube-system   storage-provisioner                1/1     Running   0          30h
+vagrant@vagrant:~$
+```
+
+## ResourceQuota
+
+Limit resources in a namespace
+
+```yaml
+apiVerion: v1
+kind: ResourceQuota
+metadata:
+  name: compute-quota
+  namespace: dev
+spec:
+  hard:
+    pods: "10"
+    requests.cpu: "4"
+    requests.memory: 2Gi
+    limits.cpu: "10"
+    limits.memory: 4Gi
+```
+```
+kubectl create -f compute.quota.yml
+```
