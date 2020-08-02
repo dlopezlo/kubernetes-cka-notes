@@ -1,9 +1,13 @@
 
 
-# Kubernetes Notes from course Certified Kubernetes Administrator (CKA) KodeKloud
+# Kubernetes Notes from course Certified Kubernetes Administrator (CKA) by Mumshad Mannambeth from KodeKloud
 
 ## Commands 
+List all namespaces in the cluster
+
+```
 kubectl get namespaces
+````
 
 List all pods from default namespace
 ```
@@ -269,55 +273,7 @@ Events:
   Normal  SuccessfulCreate  2m31s  replicaset-controller  Created pod: myapp-rs-mmpzb
   Normal  SuccessfulCreate  2m31s  replicaset-controller  Created pod: myapp-rs-4d9hb
   Normal  SuccessfulCreate  2m31s  replicaset-controller  Created pod: myapp-rs-w7zwd
-vagrant@vagrant:~$ kucectl scale --replicas=3 replicaset myapp-rs
-kucectl: command not found
-vagrant@vagrant:~$ kubectl scale --replicas=3 replicaset myapp-rs
-replicaset.apps/myapp-rs scaled
-vagrant@vagrant:~$ kubectl get replicaset
-NAME       DESIRED   CURRENT   READY   AGE
-myapp-rs   3         3         3       32m
-vagrant@vagrant:~$ kubectl get pods
-NAME             READY   STATUS    RESTARTS   AGE
-myapp-pod        1/1     Running   0          11h
-myapp-rs-nqw4g   1/1     Running   0          33m
-myapp-rs-vqnd8   1/1     Running   0          3m16s
-vagrant@vagrant:~$ kubectl describe replicaset myapp-rs
-Name:         myapp-rs
-Namespace:    default
-Selector:     type=front-end
-Labels:       app=myapp
-              type=front-end
-Annotations:  <none>
-Replicas:     3 current / 3 desired
-Pods Status:  3 Running / 0 Waiting / 0 Succeeded / 0 Failed
-Pod Template:
-  Labels:  app=myapp
-           type=front-end
-  Containers:
-   nginx-container:
-    Image:        nginx
-    Port:         <none>
-    Host Port:    <none>
-    Environment:  <none>
-    Mounts:       <none>
-  Volumes:        <none>
-Events:
-  Type    Reason            Age   From                   Message
-  ----    ------            ----  ----                   -------
-  Normal  SuccessfulCreate  59m   replicaset-controller  Created pod: myapp-rs-skdpv
-  Normal  SuccessfulCreate  59m   replicaset-controller  Created pod: myapp-rs-422rf
-  Normal  SuccessfulCreate  59m   replicaset-controller  Created pod: myapp-rs-7jv84
-  Normal  SuccessfulDelete  58m   replicaset-controller  Deleted pod: myapp-rs-7jv84
-  Normal  SuccessfulDelete  58m   replicaset-controller  Deleted pod: myapp-rs-f5bgm
-  Normal  SuccessfulDelete  58m   replicaset-controller  Deleted pod: myapp-rs-422rf
-  Normal  SuccessfulDelete  58m   replicaset-controller  Deleted pod: myapp-rs-skdpv
-  Normal  SuccessfulCreate  31m   replicaset-controller  Created pod: myapp-rs-vqnd8
-  Normal  SuccessfulCreate  31m   replicaset-controller  Created pod: myapp-rs-mmpzb
-  Normal  SuccessfulCreate  31m   replicaset-controller  Created pod: myapp-rs-4d9hb
-  Normal  SuccessfulCreate  31m   replicaset-controller  Created pod: myapp-rs-w7zwd
-  Normal  SuccessfulDelete  28m   replicaset-controller  Deleted pod: myapp-rs-mmpzb
-  Normal  SuccessfulDelete  28m   replicaset-controller  Deleted pod: myapp-rs-4d9hb
-  Normal  SuccessfulDelete  28m   replicaset-controller  Deleted pod: myapp-rs-w7zwd
+
   ```
 
 Scaling replicasets:
