@@ -6,25 +6,25 @@
 List all namespaces in the cluster
 
 ```console
-kubectl get namespaces
+vagrant@vagrant:~$ kubectl get namespaces
 ````
 
 List all pods from default namespace
 ```console
-kubectl get pods
+vagrant@vagrant:~$ kubectl get pods
 ````
 
 Get all pods from a specific namespace
 
 ```console
-kubectl get pods --namespace=kube-system
-kubectl get pods -n kube-system
+vagrant@vagrant:~$ kubectl get pods --namespace=kube-system
+vagrant@vagrant:~$ kubectl get pods -n kube-system
 ```
 
 Get all created objects:
 
 ```console
-$ kubectl get all
+vagrant@vagrant:~$ kubectl get all
 ```
 
 and the output:
@@ -74,25 +74,25 @@ ReplicaSet | apps/v1
 Deployment | apps/v1
 
 ```console
-$ kubectl create -f pod-definition.yml
+vagrant@vagrant:~$ kubectl create -f pod-definition.yml
 ```
 
 or 
 
 ```console
-$ kubectl apply -f pod-definition.yml
+vagrant@vagrant:~$ kubectl apply -f pod-definition.yml
 ```
 
 Delete a running pod:
 
 ```console
-$ kubectl delete pod myapp-pod
+vagrant@vagrant:~$ kubectl delete pod myapp-pod
 ```
 
 Get information about a running pod:
 
 ```console
-$ kubectl apply -f pod-definition.yml
+vagrant@vagrant:~$ kubectl apply -f pod-definition.yml
 ```
 
 The above command produces a output like the following:
@@ -150,7 +150,7 @@ Events:
 List the kubernetes nodes:
 
 ```console
-$ kubectl get nodes
+vagrant@vagrant:~$ kubectl get nodes
 ```
 
 ## Replication Controller
@@ -183,8 +183,8 @@ spec:
 ```
 
 ```console
-$ kubectl apply -f replication_controller.yaml
-$ kubectl get replicationcontroller
+vagrant@vagrant:~$ kubectl apply -f replication_controller.yaml
+vagrant@vagrant:~$ kubectl get replicationcontroller
 ```
 
 Replicaset
@@ -218,15 +218,15 @@ spec:
 
 
 ```console
-$ kubectl apply -f replicaset-definition.yaml
-$ kubectl get replicaset
+vagrant@vagrant:~$ kubectl apply -f replicaset-definition.yaml
+vagrant@vagrant:~$ kubectl get replicaset
 ```
 
 Replicaset can monitor and manage pods not created with the replica set. RS knows what pods to monitor using **selectors** and **labels**.
 
 ```console
-$ kubectl get replicaset
-$ kubectl get rs
+vagrant@vagrant:~$ kubectl get replicaset
+vagrant@vagrant:~$ kubectl get rs
 NAME       DESIRED   CURRENT   READY   AGE
 myapp-rs   3         3         3       11s
 ````
@@ -348,8 +348,8 @@ spec:
 ```
 
 ```console
-$ kubectl apply -f nginx-deployment.yaml
-$ kubectl get deployments
+vagrant@vagrant:~$ kubectl apply -f nginx-deployment.yaml
+vagrant@vagrant:~$ kubectl get deployments
 ```
 
 ## Generating definition files from scratch
@@ -402,7 +402,7 @@ Kubernetes creates several namespaces automatically:
 
 Create a namespace:
 ```console
-vagrant@vagrant:~$ kubectl create namespace dev
+vagrant@vagrant:~vagrant@vagrant:~$ kubectl create namespace dev
 namespace/dev created
 ```
 
