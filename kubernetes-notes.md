@@ -5,31 +5,31 @@
 ## Commands 
 List all namespaces in the cluster
 
-```
+```console
 kubectl get namespaces
 ````
 
 List all pods from default namespace
-```
+```console
 kubectl get pods
 ````
 
 Get all pods from a specific namespace
 
-```
+```console
 kubectl get pods --namespace=kube-system
 kubectl get pods -n kube-system
 ```
 
 Get all created objects:
 
-```
+```console
 $ kubectl get all
 ```
 
 and the output:
 
-```
+```console
 NAME                 READY   STATUS    RESTARTS   AGE
 pod/myapp-pod        1/1     Running   0          17h
 pod/myapp-rs-75php   1/1     Running   0          3h41m
@@ -73,26 +73,26 @@ Service | v1
 ReplicaSet | apps/v1
 Deployment | apps/v1
 
-```
-kubectl create -f pod-definition.yml
+```console
+$ kubectl create -f pod-definition.yml
 ```
 
 or 
 
-```
-kubectl apply -f pod-definition.yml
+```console
+$ kubectl apply -f pod-definition.yml
 ```
 
 Delete a running pod:
 
-```
-kubectl delete pod myapp-pod
+```console
+$ kubectl delete pod myapp-pod
 ```
 
 Get information about a running pod:
 
-```
-kubectl apply -f pod-definition.yml
+```console
+$ kubectl apply -f pod-definition.yml
 ```
 
 The above command produces a output like the following:
@@ -149,8 +149,8 @@ Events:
 
 List the kubernetes nodes:
 
-```
-kubectl get nodes
+```console
+$ kubectl get nodes
 ```
 
 ## Replication Controller
@@ -182,9 +182,9 @@ spec:
   replicas: 3
 ```
 
-```
-kubectl apply -f replication_controller.yaml
-kubectl get replicationcontroller
+```console
+$ kubectl apply -f replication_controller.yaml
+$ kubectl get replicationcontroller
 ```
 
 Replicaset
@@ -217,14 +217,14 @@ spec:
 ```
 
 
-```
-kubectl apply -f replicaset-definition.yaml
-kubectl get replicaset
+```console
+$ kubectl apply -f replicaset-definition.yaml
+$ kubectl get replicaset
 ```
 
 Replicaset can monitor and manage pods not created with the replica set. RS knows what pods to monitor using **selectors** and **labels**.
 
-```
+```console
 $ kubectl get replicaset
 $ kubectl get rs
 NAME       DESIRED   CURRENT   READY   AGE
@@ -233,7 +233,7 @@ myapp-rs   3         3         3       11s
 
 Describe/see the configuration of a replicaset:
 
-```
+```console
 kubectl describe replicaset new-replica-set
 ```
 
@@ -280,24 +280,24 @@ Scaling replicasets:
 
 1.- Update replicas in replicaset definition and execute the kubectl replace command:
 
-```
+```console
 kubectl replace -f replicaset-definition.yml
 ```
 
 2.- Use kubectl scale pointing to the definition file:
 
-```
+```console
 kubectl scale --replicas=6 -f replicaset-definition.yml
 ```
 
 3.- Use kubectl scale with the replicaset name:
-```
+```console
 kubectl scale --replicas=3 replicaset myapp-rs
 ``` 
 
 4.- Edit a replicaset or an object in memory. Changes are not applied to pods until pods are deleted and recreated but it works automatically with the replicas number.
 
-```
+```console
 kubectl edit rs new-replica-set
 ```
 
@@ -347,7 +347,7 @@ spec:
         - containerPort: 80
 ```
 
-```
+```console
 $ kubectl apply -f nginx-deployment.yaml
 $ kubectl get deployments
 ```
@@ -356,13 +356,13 @@ $ kubectl get deployments
 
 Create an nginx Pod with run and show definition:
 
-```
+```console
 kubectl run jenkins --image=jenkins --dry-run=client -o yaml
 ```
 
 Create a deployment definition file, then modify it and apply
 
-```
+```console
 kubectl create deployment --image=nginx nginx --dry-run=client -o yaml > nginx-deployment.yaml
 ```
 
@@ -424,6 +424,7 @@ namespace/dev configured
 ```
 
 Create a pod in the namespace:
+
 ```console
 vagrant@vagrant:~$ kubectl apply -f pod-definition.yml -n dev
 pod/myapp-pod created
@@ -450,7 +451,7 @@ metadata:
 
 If namespace is not specified the default one is used. But context can be switched in order to use a different namespace by default:
 
-```
+```console
 kubectl config set-context $(kubectl config current-context) --namespace=dev
 ```
 
@@ -488,6 +489,7 @@ spec:
     limits.cpu: "10"
     limits.memory: 4Gi
 ```
-```
+
+```console
 kubectl create -f compute.quota.yml
 ```
